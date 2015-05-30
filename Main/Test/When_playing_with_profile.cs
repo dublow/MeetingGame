@@ -44,7 +44,7 @@ namespace Test
             var date = DateTime.UtcNow;
             var mock = new Mock<IProfileGateway>();
 
-            var obj = GetDynData(1, "nicolas.dfr@gmail.com", "dublow", "paris", date, null, null, null);
+            var obj = GetDynProfile(1, "nicolas.dfr@gmail.com", "dublow", "paris", date, null, null, null);
             mock.Setup(m => m.GetById(It.IsIn<int>(1))).Returns(obj);
 
             var profileRepository = new ProfileRepository(mock.Object);
@@ -61,7 +61,7 @@ namespace Test
             Assert.IsNull(actual.godfather);
         }
 
-        private object GetDynData(int id, string email, string nickname, string city, DateTime creation, 
+        private object GetDynProfile(int id, string email, string nickname, string city, DateTime creation, 
             DateTime? activation, int? instagramId, int? godfatherId)
         {
             dynamic d = new ExpandoObject();
@@ -76,6 +76,16 @@ namespace Test
             d.GodfatherId = godfatherId;
 
             return d;
+        }
+
+        private object GetDynInstagram()
+        {
+            return null;
+        }
+
+        private object GetDynGodfather()
+        {
+            return null;
         }
     }
 }
