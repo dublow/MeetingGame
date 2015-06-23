@@ -15,5 +15,6 @@ namespace Persistence.Repository
 
         bool CheckEmail(string email);
         Profile GetById(int id);
+        Credential GetCredential(string email, string password);
     }
 }

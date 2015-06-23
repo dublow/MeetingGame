@@ -18,6 +18,7 @@ namespace Console
         static void Main(string[] args)
         {
             var cnx = ConfigurationManager.ConnectionStrings["MeetingGame"].ConnectionString;
+
             var provider = new SqlProvider(cnx);
 
             var container = new UnityContainer();
@@ -34,10 +35,10 @@ namespace Console
             profileRepo.Subscribe(new ConsoleLogger());
             instagramRepo.Subscribe(new ConsoleLogger());
 
-            //profileRepo.Add("nicolas.dfr1@gmail.com", "dublow", 1, "Paris", "password", null);
+            //profileRepo.Add("nicolas.dfr1@gmailzz.comzz", "dublow", 1, "Paris", "password", null);
             //instagramRepo.Add(123, "http://instagram-picture.com", "azer1234", 21);
 
-            var p = profileRepo.GetById(25);
+            profileRepo.Activate(23);
         }
     }
 }

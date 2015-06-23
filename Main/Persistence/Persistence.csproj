@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Entity\Builder\GodfatherBuilder.cs" />
     <Compile Include="Entity\Builder\InstagramBuilder.cs" />
+    <Compile Include="Entity\Credential.cs" />
     <Compile Include="Entity\Gender.cs" />
     <Compile Include="Entity\Godfather.cs" />
     <Compile Include="Entity\Instagram.cs" />

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Persistence.Entity;
 using Persistence.Entity.Builder;
 using Persistence.Gateway;
+using Shared.Cryptography;
 using Shared.Log;
 using Shared.Observer;
 
@@ -22,7 +24,7 @@ namespace Persistence.Repository
         {
             try
             {
-                gateway.Add(email, nickname, gender, city, password, godFatherId);
+                gateway.Add(email, nickname, gender, city, PasswordHash.CreateHash(password), godFatherId);
             }
             catch (Exception e)
             {
@@ -71,8 +73,7 @@ namespace Persistence.Repository
             }
         }
 
-
-        public Entity.Profile GetById(int id)
+        public Profile GetById(int id)
         {
             try
             {
@@ -97,6 +98,27 @@ namespace Persistence.Repository
             catch (Exception e)
             {
                 this.Notify(new Logger("ProfileRepository.GetById", e));
+                throw;
+            }
+        }
+
+        public Credential GetCredential(string email, string password)
+        {
+            try
+            {
+                var dynCredential = gateway.GetCredential(email);
+
+                if (dynCredential == null)
+                    return null;
+
+                if (!PasswordHash.ValidatePassword(password, dynCredential.Password))
+                    return null;
+
+                return new Credential(dynCredential.Id, email);
+            }
+            catch (Exception e)
+            {
+                this.Notify(new Logger("ProfileRepository.GetCredential", e));
                 throw;
             }
         }

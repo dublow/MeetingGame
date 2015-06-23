@@ -22,10 +22,10 @@ namespace Persistence.Gateway
             using (var context = provider.Create())
             {
                 var p = new {
-                    userId = userId,
-                    profilePicture = profilePicture,
-                    accessToken = accessToken,
-                    profileId = profileId
+                    userId, 
+                    profilePicture, 
+                    accessToken, 
+                    profileId
                 };
 
                 context.Execute("Instagram.AddInstagram", p, commandType: CommandType.StoredProcedure);

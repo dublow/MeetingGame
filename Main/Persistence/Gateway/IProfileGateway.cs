@@ -15,5 +15,6 @@ namespace Persistence.Gateway
 
         bool CheckEmail(string email);
         dynamic GetById(int id);
+        dynamic GetCredential(string email);
     }
 }

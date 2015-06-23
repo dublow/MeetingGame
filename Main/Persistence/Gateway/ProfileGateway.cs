@@ -25,11 +25,11 @@ namespace Persistence.Gateway
             { 
                 var p = new
                 {
-                    email = email,
-                    nickname = nickname,
-                    gender = gender,
-                    city = city,
-                    password = password,
+                    email, 
+                    nickname, 
+                    gender, 
+                    city, 
+                    password,
                     godFatherIdFk = godFatherId
                 };
 
@@ -73,8 +73,16 @@ namespace Persistence.Gateway
                 return context
                         .Query("Profile.GetById", new { id = id }, commandType: CommandType.StoredProcedure)
                         .FirstOrDefault();
+            }
+        }
 
-                
+        public dynamic GetCredential(string email)
+        {
+            using (var context = provider.Create())
+            {
+                return context
+                        .Query("Profile.GetCredential", new { email = email }, commandType: CommandType.StoredProcedure)
+                        .FirstOrDefault();
             }
         }
     }
